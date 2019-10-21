@@ -19,41 +19,52 @@
         <% include ./partials/header %>
     </header>
     <div class="container">
+        <div class="row">
+            <div class="col-3">
+                <img src="assets/images/skynews.jpg" class="img-fluid" alt="Responsive image" style="padding:20px">
 
-        <img src="assets/images/skynews.jpg" class="img-fluid" alt="Responsive image" style="padding:20px">
-    </div>
-    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add comment
-            </button>
-
-    <!-- Modal -->
-    <div id="myModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Add comment</h4>
-                </div>
-                <div class="modal-body">
-                    <form id="savedA" action="/addComment" method="POST">
-                        <label for="userComment">Comment </label>
-                        <input id="userComment" type="text" name="userComment" required>
-
-
-                        <button class="btn btn-primary" type="submit">Save</button>
-
-                    </form>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
             </div>
+            <div class="col-9">
+                <div id="savedArticle">
 
+                </div>
+                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add comment
+                </button>
+
+                <!-- Modal -->
+                <div id="myModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Add comment</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form id="savedA" action="/addComment" method="POST">
+                                    <label for="userComment">Comment </label>
+                                    <input id="userComment" type="text" name="userComment" required>
+
+
+                                    <button class="btn btn-primary" type="submit">Save</button>
+
+                                </form>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
     </div>
+
     </div>
     </div>
 

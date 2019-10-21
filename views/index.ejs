@@ -57,8 +57,9 @@
                     console.log(data.response.results[x]);
                     var title = $('<p>').text("Title: " + data.response.results[x].webTitle);
                     var date = $("<p>").text("Publication date: " + data.response.results[x].webPublicationDate)
-                    var url = $("<p>").text("URL:" + data.response.results[x].webUrl)
-                    $("#article").append(title, date, url)
+                    var url = $("<p>").text("URL:" + data.response.results[x].webUrl);
+                    var bSave = $("<button>").attr("type", "submit").text("Save")
+                    $("#article").append(title, date, url, bSave)
                 }
             })
 
