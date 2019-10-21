@@ -50,12 +50,14 @@
             $.ajax({
                 url: queryArticle,
                 method: "GET"
-            }).then(function(response) {
-                for (x = 0; x < results.length; x++) {
-                    console.log(results.data[x])
-                    var title = $('<p>').text("Title: " + results.data[x].webTitle);
-                    var date = $("<p>").text("Publication date: " + results.data[x].webPublicationDate)
-                    var url = $("<p>").text("URL:" + results.data[x].webUrl)
+            }).then(function(data) {
+                console.log(data);
+
+                for (x = 0; x < 10; x++) {
+                    console.log(data.response.results[x]);
+                    var title = $('<p>').text("Title: " + data.response.results[x].webTitle);
+                    var date = $("<p>").text("Publication date: " + data.response.results[x].webPublicationDate)
+                    var url = $("<p>").text("URL:" + data.response.results[x].webUrl)
                     $("#article").append(title, date, url)
                 }
             })

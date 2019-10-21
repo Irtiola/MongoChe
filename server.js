@@ -16,7 +16,22 @@ app.get("/", function(req, res) {
     res.render("index");
 });
 
+app.get("/index", function(req, res) {
+    res.render("index");
+});
 
+app.get("/articles", function(req, res) {
+    res.render("articles")
+});
+
+app.post("/save", function(req, res) {
+
+
+});
+app.post("/addComment", function(req, res) {
+    var userComment = req.body.userComment;
+
+});
 
 
 app.listen(process.env.PORT || 3000, function() {
