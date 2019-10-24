@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en" class="home">
 
 
@@ -69,6 +69,53 @@
         })
 
 
+    </script>
+</body>
+
+</html> -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+
+    <ul id="songs">
+
+    </ul>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        $.ajax({
+            method: 'GET',
+            url: '/songs'
+        }).then(function (songs) {
+            for (var i = 0; i < songs.length; i++) {
+                var $li = $('<li>'); //<li></li> 
+
+                var tx = `_id: ${songs[i]._id} | votes: ${songs[i].votes} | song name: ${songs[i].songName}`
+
+                $li.text(tx);
+
+                //make the delete form
+                var f = $('<form>').attr('method', 'POST').attr('action', '/songs/' + songs[i]._id + '?_method=DELETE')
+
+                //do not need because we are passing the _id of the song in the url
+
+                // var in = $('<input>').attr('type', 'hidden').attr('name', '_id').attr('value', songs[i]._id)
+
+                var b = $('<button>').text('save');
+                f.append(b);
+
+                $li.append(f)
+
+                $('#songs').append($li);
+            }
+
+        })
     </script>
 </body>
 
