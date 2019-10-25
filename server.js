@@ -35,16 +35,21 @@ var scrape = new Nightmare({
             // In the currently selected element, look at its child elements (i.e., its a-tags),
             // then save the values for any "href" attributes that the child elements may have
             var link = $(element).children().eq(0).attr("href");
+            $(".fc-item__standfirst").each(function (y, element) {
+                var text = $(element).text()
+                // if (!link.includes('https://old.reddit.com/r/webdev')) {
+                //     link = "https://old.reddit.com/r/webdev" + link;
+                // }
 
-            // if (!link.includes('https://old.reddit.com/r/webdev')) {
-            //     link = "https://old.reddit.com/r/webdev" + link;
-            // }
+                // Save these results in an object that we'll push into the results array we defined earlier
+                results.push({
+                    title: title,
+                    link: link,
+                    text: text
 
-            // Save these results in an object that we'll push into the results array we defined earlier
-            results.push({
-                title: title,
-                link: link
-            });
+                });
+
+            })
         });
 
         // Log the results once you've looped through each of the elements found with cheerio

@@ -86,12 +86,12 @@
     <script type="text/javascript">
         $.ajax({
             method: 'GET',
-            url: '/songs'
-        }).then(function (songs) {
-            for (var i = 0; i < songs.length; i++) {
+            url: '/articles'
+        }).then(function (articles) {
+            for (var i = 0; i < articles.length; i++) {
                 var $li = $('<li>'); //<li></li> 
 
-                var tx = `_id: ${songs[i]._id} | votes: ${songs[i].votes} | song name: ${songs[i].songName}`
+                var tx = `_id: ${articles[i]._id} | votes: ${songs[i].votes} | song name: ${songs[i].songName}`
 
                 $li.text(tx);
 
