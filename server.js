@@ -18,45 +18,28 @@ const request = require("request");
 const db = mongojs(databaseUrl, collections);
 
 
-db.on("error", function(error) {
+db.on("error", function (error) {
     console.log("Database Error:", error);
 });
 
-function updateDb(title, link, content) {
-    db.scrapedData.update({ Title: title, Link: link }, { $set: { Title: title, Link: link } }, { upsert: true }, );
+function updateDb(title, link) {
+    db.scrapedData.update({ Title: title, Link: link }, { $set: { Title: title, Link: link } }, { upsert: true });
 };
+app.use(express.static(__dirname + '/public/'));
 
-app.post("/saveArticle", function(req, res) {
+app.post("/saveArticle", function (req, res) {
 
     var title = req.body.title;
     var link = req.body.link;
-    var content = req.body.content;
-    updateDb(title, link, content);
-})
-
-app.get("/savedArticles", function(req, res) {
-    db.scrapedData.find(function(error, result) {
-        res.render("savedArticles", { results: result });
-    });
-});
-
-app.post("/addComment", function(req, res) {
-    var id = req.body.id;
-    var comment = req.body.newComment;
-    db.scrapedData.update({ "_id": mongojs.ObjectID(id) }, { $push: { Comments: comment } }, function(error, response) {
-        if (error) {
-            console.log(error)
-        }
-    });
-    res.redirect("/savedArticles");
+    updateDb(title, link);
 })
 
 
-app.get("/", function(req, res) {
-    request.get("https://www.theguardian.com/us", function(err, response, body) {
+app.get("/", function (req, res) {
+    request.get("https://www.theguardian.com/us", function (err, response, body) {
         var $ = cheerio.load(body);
         var results = [];
-        $("h3.fc-item__title ").each(function(i, element) {
+        $("h3.fc-item__title ").each(function (i, element) {
             var title = $(element).text();
             var link = $(element).children().eq(0).attr("href");
             // var text = $(element).children().eq(1).attr(".fc-item__kicker")
@@ -70,8 +53,22 @@ app.get("/", function(req, res) {
         res.render("index", { results: results });
     });
 });
+app.get("/savedArticles", function (req, res) {
+    db.scrapedData.find(function (error, result) {
+        res.render("savedArticles", { results: result });
+    });
+});
 
-
-app.listen("3000", function() {
-    console.log("Server running on 3000");
+app.post("/addComment", function (req, res) {
+    var id = req.body.id;
+    var comment = req.body.newComment;
+    db.scrapedData.update({ "_id": mongojs.ObjectID(id) }, { $push: { Comments: comment } }, function (error, response) {
+        if (error) {
+            console.log(error)
+        }
+    });
+    res.redirect("/savedArticles");
+})
+app.listen(process.env.PORT || 3000, function () {
+    console.log("Listening on 3000");
 });
