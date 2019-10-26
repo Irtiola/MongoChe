@@ -18,3 +18,15 @@
     font-size:medium;
     width: 100px
 }
+
+.nav-link{
+   color: black; 
+}
+#saved{
+    text-align: left;
+    margin-left: 180px;
+    padding-top: 50px;
+}
+body{
+    background-image: url("images/textured_paper.png");
+}

@@ -15,7 +15,7 @@ const collections = ["scrapedData"];
 
 const request = require("request");
 
-const db = mongojs(databaseUrl, collections);
+const db = mongojs(process.env.MONGODB_URI || databaseUrl, collections);
 
 
 db.on("error", function (error) {
@@ -42,7 +42,6 @@ app.get("/", function (req, res) {
         $("h3.fc-item__title ").each(function (i, element) {
             var title = $(element).text();
             var link = $(element).children().eq(0).attr("href");
-            // var text = $(element).children().eq(1).attr(".fc-item__kicker")
             if (link[0] == "/") {
                 link = "https://www.theguardian.com" + link;
             }

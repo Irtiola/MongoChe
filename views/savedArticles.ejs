@@ -16,30 +16,31 @@
     <header>
         <% include ./partials/header %>
     </header>
-    <% for (var i = 0; i < results.length; i++) { %>
-    <div>
-        <h4>
-            <%= results[i].Title %>
-        </h4>
+    <div id="saved">
+        <% for (var i = 0; i < results.length; i++) { %>
+        <div>
+            <h4>
+                <%= results[i].Title %>
+            </h4>
 
-        <a href="<%= results[i].Link %>">
-            <%= results[i].Link %>
-        </a>
-        <% if (results[i].Comments) {%>
-        <% for (let x = 0; x < results[i].Comments.length; x++) { %>
-        <p><%= results[i].Comments[x]%></p>
-        <% } %>
-        <%}%>
+            <a href="<%= results[i].Link %>">
+                <%= results[i].Link %>
+            </a>
+            <% if (results[i].Comments) {%>
+            <% for (let x = 0; x < results[i].Comments.length; x++) { %>
+            <p><%= results[i].Comments[x]%></p>
+            <% } %>
+            <%}%>
         <form action="/addComment" method="POST">
             <input type="hidden" name="id" value="<%= results[i]._id%>">
-        <input id="inComment" type="text" name="newComment" placeholder="Please share your opinion">
-        <div>
-            <button class="btn btn-primary btn-lg">Submit</button>
+            <input id="inComment" type="text" name="newComment" placeholder="Please share your opinion">
+            <div>
+                <button class="btn btn-primary btn-lg">Submit</button>
+            </div>
+            </form>
         </div>
-        </form>
+        <% } %>
     </div>
-    <% } %>
-
     <div class=" footer ">
         <% include ./partials/footer %>
 
